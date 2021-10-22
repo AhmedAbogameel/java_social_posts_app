@@ -12,42 +12,42 @@ import com.example.socialpostsapp.pojo.PostModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
+public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHolder> {
 
-    private List<PostModel> posts = new ArrayList<>();
+    private List<PostModel> list = new ArrayList<>();
 
-    PostsAdapter(){}
+    PostsAdapter() {}
 
-    public void setPosts(List<PostModel> posts) {
-        this.posts = posts;
+    public void setList(List<PostModel> list) {
+        this.list = list;
         notifyDataSetChanged();
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PostsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.post_card, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        PostsViewHolder PostsViewHolder = new PostsViewHolder(view);
+        return PostsViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.titleTV.setText(posts.get(position).getTitle());
-        holder.userTV.setText(String.valueOf(posts.get(position).getId()));
-        holder.bodyTV.setText(posts.get(position).getBody());
+    public void onBindViewHolder(@NonNull PostsViewHolder holder, int position) {
+        holder.titleTV.setText(list.get(position).getTitle());
+        holder.userTV.setText(String.valueOf(list.get(position).getId()));
+        holder.bodyTV.setText(list.get(position).getBody());
     }
 
     @Override
     public int getItemCount() {
-        return posts.size();
+        return list.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class PostsViewHolder extends RecyclerView.ViewHolder {
 
         TextView titleTV, userTV, bodyTV;
 
-        public ViewHolder(@NonNull View itemView) {
+        public PostsViewHolder(@NonNull View itemView) {
             super(itemView);
             titleTV = itemView.findViewById(R.id.titleTV);
             userTV = itemView.findViewById(R.id.userIDTV);

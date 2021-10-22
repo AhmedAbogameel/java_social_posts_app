@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         postsViewModel.posts.observe(this, new Observer<List<PostModel>>() {
             @Override
             public void onChanged(List<PostModel> postModels) {
-                adapter.setPosts(postModels);
+                adapter.setList(postModels);
             }
         });
     }
