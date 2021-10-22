@@ -11,7 +11,7 @@ public class PostsClient {
 
     private static final String BASE_URL = "https://jsonplaceholder.typicode.com/";
     private static PostsClient INSTANCE;
-    private PostsInterface postsInterface;
+    private final PostsInterface postsInterface;
 
     public PostsClient() {
         Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(

@@ -11,5 +11,4 @@ public interface PostsInterface {
     @GET("posts")
     public Call<List<PostModel>> getPosts();
 
-
 }
