@@ -1,0 +1,2 @@
+rootProject.name = "Social Posts App"
+include ':app'
