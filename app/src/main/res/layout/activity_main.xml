@@ -8,7 +8,21 @@
         tools:context=".ui.main.MainActivity">
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/postsRecyclerView"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+    <ProgressBar
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressBar"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:backgroundTint="@color/black"
+            android:progress="@integer/material_motion_duration_medium_1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

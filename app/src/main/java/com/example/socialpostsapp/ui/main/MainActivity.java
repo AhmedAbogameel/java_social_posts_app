@@ -1,5 +1,6 @@
 package com.example.socialpostsapp.ui.main;
 
+import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.lifecycle.Observer;
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
         postsViewModel.posts.observe(this, new Observer<List<PostModel>>() {
             @Override
             public void onChanged(List<PostModel> postModels) {
+                findViewById(R.id.postsRecyclerView).setVisibility(View.VISIBLE);
+                findViewById(R.id.progressBar).setVisibility(View.GONE);
                 adapter.setList(postModels);
             }
         });
