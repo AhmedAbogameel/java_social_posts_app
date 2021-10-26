@@ -1,8 +1,8 @@
 package com.example.socialpostsapp.ui.main;
 
+import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView postsRecyclerView = findViewById(R.id.postsRecyclerView);
 
-        final  PostsAdapter adapter = new PostsAdapter();
+        final PostsAdapter adapter = new PostsAdapter();
 
         postsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         postsRecyclerView.setAdapter(adapter);
@@ -39,5 +39,9 @@ public class MainActivity extends AppCompatActivity {
                 adapter.setList(postModels);
             }
         });
+    }
+
+    public void onFABClicked(View view) {
+        AddPostDialog.showDialog(this, this.postsViewModel);
     }
 }

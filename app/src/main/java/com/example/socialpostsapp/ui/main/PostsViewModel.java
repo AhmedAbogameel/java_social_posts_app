@@ -28,4 +28,21 @@ public class PostsViewModel extends ViewModel {
          });
     }
 
+    public void addPost(String title, String body){
+        PostsClient.getINSTANCE().addPost(title,body).enqueue(new Callback<PostModel>() {
+            @Override
+            public void onResponse(Call<PostModel> call, Response<PostModel> response) {
+                PostModel postModel = response.body();
+                List<PostModel> oldPostsList = posts.getValue();
+                oldPostsList.add(0, postModel);
+                posts.setValue(oldPostsList);
+            }
+
+            @Override
+            public void onFailure(Call<PostModel> call, Throwable t) {
+                System.out.println(t.toString());
+            }
+        });
+    }
+
 }

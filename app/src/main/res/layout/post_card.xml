@@ -4,33 +4,73 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_margin="10dp"
+        android:layout_margin="@dimen/card_top_margin"
         android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:padding="@dimen/card_top_margin"
+                  android:orientation="vertical">
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
+            <TextView
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/titleTV"
+                    android:text="@string/app_name"
+                    tools:ignore="MissingConstraints"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/app_name"
+                    android:id="@+id/userIDTV"
+                    app:layout_constraintStart_toEndOf="@+id/titleTV"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+        </LinearLayout>
         <TextView
+                android:layout_marginTop="@dimen/card_top_margin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/titleTV"
-                tools:layout_editor_absoluteY="38dp"
-                tools:layout_editor_absoluteX="16dp"
-                tools:ignore="MissingConstraints"/>
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/userIDTV"
-                tools:ignore="MissingConstraints" app:layout_constraintStart_toEndOf="@+id/titleTV"
-                app:layout_constraintBottom_toTopOf="@+id/bodyTV" app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.957"/>
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:text="@string/app_name"
                 android:id="@+id/bodyTV"
-                tools:layout_editor_absoluteX="176dp"
-                app:layout_constraintTop_toBottomOf="@+id/titleTV"
-                tools:ignore="MissingConstraints"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                app:layout_constraintTop_toBottomOf="@+id/titleTV"/>
+        <LinearLayout
+                android:layout_marginTop="@dimen/card_top_margin"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <Button
+                    android:id="@+id/saveButton"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/yellow"
+                    android:textColor="@color/black"
+                    android:text="@string/save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            <TextView
+                    android:layout_weight="2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            <Button
+                    android:id="@+id/editButton"
+                    android:layout_weight="1"
+                    android:text="@string/edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            <TextView
+                    android:layout_weight="2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            <Button
+                    android:id="@+id/deleteButton"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/red"
+                    android:text="@string/delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </LinearLayout>
 </androidx.cardview.widget.CardView>
