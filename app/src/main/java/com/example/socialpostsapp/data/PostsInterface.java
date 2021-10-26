@@ -1,11 +1,10 @@
 package com.example.socialpostsapp.data;
 
 import com.example.socialpostsapp.pojo.AddPostModel;
+import com.example.socialpostsapp.pojo.EditPostModel;
 import com.example.socialpostsapp.pojo.PostModel;
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.POST;
+import retrofit2.http.*;
 
 import java.util.List;
 
@@ -16,5 +15,8 @@ public interface PostsInterface {
 
     @POST("posts")
     public Call<PostModel> addPost(@Body AddPostModel addPostModel);
+
+    @PATCH("posts/{id}")
+    public Call<PostModel> editPost(@Query("id") int id, @Body EditPostModel editPostModel);
 
 }

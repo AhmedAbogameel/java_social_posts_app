@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView postsRecyclerView = findViewById(R.id.postsRecyclerView);
 
-        final PostsAdapter adapter = new PostsAdapter();
+        final PostsAdapter adapter = new PostsAdapter(postsViewModel);
 
         postsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         postsRecyclerView.setAdapter(adapter);
@@ -42,6 +42,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onFABClicked(View view) {
-        AddPostDialog.showDialog(this, this.postsViewModel);
+        AddPostDialog.showDialog(this, this.postsViewModel, null);
     }
 }

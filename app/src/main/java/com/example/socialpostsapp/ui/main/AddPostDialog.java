@@ -4,12 +4,14 @@ import android.content.Context;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import com.example.socialpostsapp.R;
+import com.example.socialpostsapp.pojo.PostModel;
 
 public class AddPostDialog {
 
-    public static void showDialog(Context context, PostsViewModel postsViewModel) {
+    public static void showDialog(Context context, PostsViewModel postsViewModel, @Nullable PostModel postModel) {
         AlertDialog alertDialog;
 
         final EditText titleInput = new EditText(context);
@@ -17,6 +19,11 @@ public class AddPostDialog {
 
         final EditText bodyInput = new EditText(context);
         bodyInput.setHint("Body");
+
+        if(postModel != null){
+            titleInput.setText(postModel.getTitle());
+            bodyInput.setText(postModel.getBody());
+        }
 
         final LinearLayout layout = new LinearLayout(context);
         layout.setOrientation(LinearLayout.VERTICAL);
@@ -37,11 +44,17 @@ public class AddPostDialog {
                 return;
             }
             layout.removeViewAt(2);
-            postsViewModel.addPost(title, body);
+            if(postModel == null){
+                postsViewModel.addPost(title, body);
+            }else{
+                postModel.setTitle(title);
+                postModel.setBody(body);
+                postsViewModel.editPost(postModel);
+            }
             alertDialog.dismiss();
         });
 
-        alertDialog.setTitle("Add Post");
+        alertDialog.setTitle(postModel == null ? "Add Post" : "Edit Post");
         alertDialog.setView(layout);
         alertDialog.show();
     }

@@ -1,5 +1,7 @@
 package com.example.socialpostsapp.ui.main;
 
+import android.os.Build;
+import android.widget.Toast;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import com.example.socialpostsapp.data.PostsClient;
@@ -36,6 +38,20 @@ public class PostsViewModel extends ViewModel {
                 List<PostModel> oldPostsList = posts.getValue();
                 oldPostsList.add(0, postModel);
                 posts.setValue(oldPostsList);
+            }
+
+            @Override
+            public void onFailure(Call<PostModel> call, Throwable t) {
+                System.out.println(t.toString());
+            }
+        });
+    }
+
+    public void editPost(PostModel postModel){
+        PostsClient.getINSTANCE().editPost(postModel).enqueue(new Callback<PostModel>() {
+            @Override
+            public void onResponse(Call<PostModel> call, Response<PostModel> response) {
+                System.out.println("Edit!");
             }
 
             @Override

@@ -17,8 +17,11 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
 
     private List<PostModel> list = new ArrayList<>();
     private Button saveButton, editButton, deleteButton;
+    final private PostsViewModel postsViewModel;
 
-    PostsAdapter() {}
+    PostsAdapter(PostsViewModel postsViewModel) {
+        this.postsViewModel = postsViewModel;
+    }
 
     public void setList(List<PostModel> list) {
         this.list = list;
@@ -43,6 +46,13 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
             @Override
             public void onClick(View view) {
                 System.out.println(list.get(position).getTitle());
+            }
+        });
+
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddPostDialog.showDialog(view.getContext(), postsViewModel, list.get(position));
             }
         });
 

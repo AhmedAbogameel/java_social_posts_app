@@ -1,6 +1,7 @@
 package com.example.socialpostsapp.data;
 
 import com.example.socialpostsapp.pojo.AddPostModel;
+import com.example.socialpostsapp.pojo.EditPostModel;
 import com.example.socialpostsapp.pojo.PostModel;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -34,6 +35,10 @@ public class PostsClient {
 
     public Call<PostModel> addPost(String title, String body) {
         return postsInterface.addPost(new AddPostModel(title,body,1));
+    }
+
+    public Call<PostModel> editPost(PostModel postModel){
+        return postsInterface.editPost(postModel.getId(), new EditPostModel(postModel));
     }
 
 }
