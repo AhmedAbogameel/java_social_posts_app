@@ -51,12 +51,12 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
             }
         });
 
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                System.out.println(list.get(position).getTitle());
-            }
-        });
+//        saveButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                System.out.println(list.get(position).getTitle());
+//            }
+//        });
 
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +85,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
 
             cardView = itemView.findViewById(R.id.cardView);
 
-            saveButton = itemView.findViewById(R.id.saveButton);
+//            saveButton = itemView.findViewById(R.id.saveButton);
             editButton = itemView.findViewById(R.id.editButton);
 //            deleteButton = itemView.findViewById(R.id.deleteButton);
         }

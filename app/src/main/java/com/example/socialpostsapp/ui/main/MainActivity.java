@@ -2,7 +2,6 @@ package com.example.socialpostsapp.ui.main;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -10,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.socialpostsapp.R;
 import com.example.socialpostsapp.pojo.PostModel;
+import com.example.socialpostsapp.sql.SQLHelper;
 
 import java.util.List;
 
@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        new SQLHelper(this);
 
         postsViewModel = ViewModelProviders.of(this).get(PostsViewModel.class);
         postsViewModel.getPosts();
