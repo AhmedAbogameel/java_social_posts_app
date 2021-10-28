@@ -1,11 +1,11 @@
 package com.example.socialpostsapp.ui.main;
 
-import android.os.Build;
-import android.widget.Toast;
+import android.content.Context;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import com.example.socialpostsapp.data.PostsClient;
 import com.example.socialpostsapp.pojo.PostModel;
+import com.example.socialpostsapp.sql.SQLHelper;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -15,6 +15,7 @@ import java.util.List;
 public class PostsViewModel extends ViewModel {
 
     MutableLiveData<List<PostModel>> posts = new MutableLiveData<>();
+    public boolean isOffline = false;
 
     public void getPosts(){
          PostsClient.getINSTANCE().getPosts().enqueue(new Callback<List<PostModel>>() {
@@ -25,7 +26,8 @@ public class PostsViewModel extends ViewModel {
 
              @Override
              public void onFailure(Call<List<PostModel>> call, Throwable t) {
-                 System.out.println(t.toString());
+                 isOffline = true;
+                 posts.setValue(SQLHelper.myFav);
              }
          });
     }

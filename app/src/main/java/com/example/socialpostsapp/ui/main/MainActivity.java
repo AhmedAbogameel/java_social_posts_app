@@ -39,7 +39,11 @@ public class MainActivity extends AppCompatActivity {
             public void onChanged(List<PostModel> postModels) {
                 findViewById(R.id.postsRecyclerView).setVisibility(View.VISIBLE);
                 findViewById(R.id.progressBar).setVisibility(View.GONE);
+                if(postsViewModel.isOffline){
+                    findViewById(R.id.fab).setVisibility(View.GONE);
+                }
                 adapter.setList(postModels);
+
             }
         });
     }

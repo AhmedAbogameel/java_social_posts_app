@@ -1,6 +1,5 @@
 package com.example.socialpostsapp.ui.main;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +10,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.socialpostsapp.R;
 import com.example.socialpostsapp.pojo.PostModel;
+import com.example.socialpostsapp.sql.SQLHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,6 @@ import java.util.List;
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHolder> {
 
     private List<PostModel> list = new ArrayList<>();
-    private Button saveButton, editButton;
     final private PostsViewModel postsViewModel;
 
     PostsAdapter(PostsViewModel postsViewModel) {
@@ -40,25 +39,37 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
 
     @Override
     public void onBindViewHolder(@NonNull PostsViewHolder holder, int position) {
-        holder.titleTV.setText(list.get(position).getTitle());
-        holder.userTV.setText(String.valueOf(list.get(position).getId()));
-        holder.bodyTV.setText(list.get(position).getBody());
+        final PostModel postModel = list.get(position);
+        holder.titleTV.setText(postModel.getTitle());
+        holder.userTV.setText(String.valueOf(postModel.getId()));
+        holder.bodyTV.setText(postModel.getBody());
 
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
+        if(postsViewModel.isOffline){
+            holder.editButton.setVisibility(View.GONE);
+            holder.saveButton.setVisibility(View.GONE);
+        }
+
+        if(SQLHelper.isFav(postModel.getId())){
+            holder.saveButton.setText(R.string.remove);
+            holder.saveButton.setBackgroundColor(holder.cardView.getResources().getColor(R.color.red));
+        }else{
+            holder.saveButton.setText(R.string.save);
+            holder.saveButton.setBackgroundColor(holder.cardView.getResources().getColor(R.color.teal_700));
+        }
+
+        holder.saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: Navigate to details View
+                if(SQLHelper.isFav(postModel.getId())){
+                    SQLHelper.removeFav(postModel.getId());
+                }else{
+                    SQLHelper.addFav(postModel);
+                }
+                notifyItemChanged(position);
             }
         });
 
-//        saveButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                System.out.println(list.get(position).getTitle());
-//            }
-//        });
-
-        editButton.setOnClickListener(new View.OnClickListener() {
+        holder.editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AddPostDialog.showDialog(view.getContext(), postsViewModel, list.get(position));
@@ -76,6 +87,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
 
         CardView cardView;
         TextView titleTV, userTV, bodyTV;
+        Button saveButton, editButton;
 
         public PostsViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -85,7 +97,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
 
             cardView = itemView.findViewById(R.id.cardView);
 
-//            saveButton = itemView.findViewById(R.id.saveButton);
+            saveButton = itemView.findViewById(R.id.saveButton);
             editButton = itemView.findViewById(R.id.editButton);
 //            deleteButton = itemView.findViewById(R.id.deleteButton);
         }

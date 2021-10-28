@@ -6,15 +6,18 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 import com.example.socialpostsapp.pojo.PostModel;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SQLHelper extends SQLiteOpenHelper {
 
-    public static final String dbName = "Tasks";
+    public static final String dbName = "Fav";
     public static final int dbVersion = 1;
     public static SQLiteDatabase db;
-    public static Map<Integer, PostModel> myFav = new HashMap<>();
+    public static List<PostModel> myFav = new ArrayList<>();
 
     public SQLHelper(@Nullable Context context) {
         super(context, dbName, null, dbVersion);
@@ -38,27 +41,42 @@ public class SQLHelper extends SQLiteOpenHelper {
     }
 
     public static void removeFav(Integer postId){
-        for (Map.Entry<Integer, PostModel> entry : myFav.entrySet()) {
-            if (entry.getValue().getId() == postId) {
+        for (int i = 0; i < myFav.size(); i++){
+            PostModel entry = myFav.get(i);
+            if(entry.getId() == postId){
                 db.delete("Fav","PostId = " + postId, null);
-                myFav.remove(entry.getKey());
+                myFav.remove(i);
                 break;
             }
         }
+//        for (Map.Entry<Integer, PostModel> entry : myFav.entrySet()) {
+//            if (entry.getValue().getId() == postId) {
+//                db.delete("Fav","PostId = " + postId, null);
+//                myFav.remove(entry.getKey());
+//                break;
+//            }
+//        }
     }
 
     public static void addFav(PostModel postModel){
+        if(isFav(postModel.getId())) return;
         String sql = "insert into Fav(Title, Body, UserId, PostId) values (?, ?, ?, ?)";
         String[] values = {postModel.getTitle(), postModel.getBody(), String.valueOf(postModel.getUserId()), String.valueOf(postModel.getId())};
         db.execSQL(sql, values);
+        getFav();
     }
 
     public static boolean isFav(Integer postId){
-        for (Map.Entry<Integer, PostModel> entry : myFav.entrySet()) {
-            if (entry.getValue().getId() == postId) {
+        for (PostModel entry : myFav) {
+            if (entry.getId() == postId) {
                 return true;
             }
         }
+//        for (Map.Entry<Integer, PostModel> entry : myFav.entrySet()) {
+//            if (entry.getValue().getId() == postId) {
+//                return true;
+//            }
+//        }
         return false;
     }
 
@@ -70,8 +88,8 @@ public class SQLHelper extends SQLiteOpenHelper {
                 String body = cursor.getString(cursor.getColumnIndex("Body"));
                 int postId = cursor.getInt(cursor.getColumnIndex("PostId"));
                 int userId = cursor.getInt(cursor.getColumnIndex("UserId"));
-                int id = cursor.getInt(cursor.getColumnIndex("_id"));
-                myFav.put(id, new PostModel(postId, userId, title, body));
+//                int id = cursor.getInt(cursor.getColumnIndex("_id"));
+                myFav.add(new PostModel(postId, userId, title, body));
                 cursor.moveToNext();
             }
         }
