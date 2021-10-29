@@ -46,7 +46,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
 
         if(postsViewModel.isOffline){
             holder.editButton.setVisibility(View.GONE);
-            holder.saveButton.setVisibility(View.GONE);
         }
 
         if(SQLHelper.isFav(postModel.getId())){
@@ -65,7 +64,11 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
                 }else{
                     SQLHelper.addFav(postModel);
                 }
-                notifyItemChanged(position);
+                if(postsViewModel.isOffline) {
+                    notifyItemRemoved(position);
+                } else {
+                    notifyItemChanged(position);
+                }
             }
         });
 
