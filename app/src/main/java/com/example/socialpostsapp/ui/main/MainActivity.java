@@ -1,8 +1,10 @@
 package com.example.socialpostsapp.ui.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,6 +13,10 @@ import com.example.socialpostsapp.R;
 import com.example.socialpostsapp.firebase.FirebaseMessagingHelper;
 import com.example.socialpostsapp.pojo.PostModel;
 import com.example.socialpostsapp.sql.SQLHelper;
+import com.example.socialpostsapp.ui.login.LoginActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar toolbar = findViewById(R.id.toolBar);
+        setSupportActionBar(toolbar);
 
         new SQLHelper(this);
         new FirebaseMessagingHelper(this);
@@ -47,6 +56,17 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        findViewById(R.id.signOut).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+
     }
 
     public void onFABClicked(View view) {
