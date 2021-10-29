@@ -1,6 +1,8 @@
 package com.example.socialpostsapp.ui.splash;
 
 import android.content.Intent;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.example.socialpostsapp.R;
@@ -21,9 +23,14 @@ public class SplashActivity extends AppCompatActivity {
 
         FirebaseApp.initializeApp(this);
 
+        ImageView splashImage = findViewById(R.id.splashImage);
+
+        splashImage.startAnimation(AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left));
+
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
+                splashImage.clearAnimation();
                 Intent intent;
                 if(FirebaseAuth.getInstance().getCurrentUser() == null){
                     intent = new Intent(getApplicationContext(), LoginActivity.class);
