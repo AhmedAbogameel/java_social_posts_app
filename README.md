@@ -6,6 +6,8 @@
 
 # FirebaseAuth Email & OTP.
 
+# GetImage from gallery then upload to FirebaseAccount
+
 # LocalNotification.
 
 # RecyclerView.
