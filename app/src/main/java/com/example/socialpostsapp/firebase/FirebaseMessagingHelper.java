@@ -53,25 +53,18 @@ public class FirebaseMessagingHelper extends FirebaseMessagingService {
     }
 
     private void showLocalNotification(String title, String body){
-        if(context == null){
-            return;
-        }
-        int NOTIFICATION_ID = 234;
+        int NOTIFICATION_ID = 1;
         String CHANNEL_ID = "0";
         CharSequence name = "BasicChannel";
-        String Description = "Basic Channel";
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             int importance = NotificationManager.IMPORTANCE_HIGH;
             NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
-            mChannel.setDescription(Description);
-            mChannel.enableLights(true);
-            mChannel.setLightColor(Color.RED);
             mChannel.enableVibration(true);
-            Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-            AudioAttributes audioAttributes = new AudioAttributes.Builder().build();
-            mChannel.setSound(alarmSound, audioAttributes);
+//            Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+//            AudioAttributes audioAttributes = new AudioAttributes.Builder().build();
+//            mChannel.setSound(alarmSound, audioAttributes);
             mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
             mChannel.setShowBadge(true);
             notificationManager.createNotificationChannel(mChannel);
@@ -82,12 +75,12 @@ public class FirebaseMessagingHelper extends FirebaseMessagingService {
                 .setContentTitle(title)
                 .setContentText(body);
 
-        Intent resultIntent = new Intent(context, MainActivity.class);
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-        stackBuilder.addParentStack(MainActivity.class);
-        stackBuilder.addNextIntent(resultIntent);
-        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-        builder.setContentIntent(resultPendingIntent);
+//        Intent resultIntent = new Intent(context, MainActivity.class);
+//        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+//        stackBuilder.addParentStack(MainActivity.class);
+//        stackBuilder.addNextIntent(resultIntent);
+//        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+//        builder.setContentIntent(resultPendingIntent);
         notificationManager.notify(NOTIFICATION_ID, builder.build());
     }
 }

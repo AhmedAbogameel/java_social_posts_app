@@ -1,6 +1,7 @@
 package com.example.socialpostsapp.ui.main;
 
 import android.content.Context;
+import android.os.Build;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import com.example.socialpostsapp.data.PostsClient;
@@ -53,7 +54,12 @@ public class PostsViewModel extends ViewModel {
         PostsClient.getINSTANCE().editPost(postModel).enqueue(new Callback<PostModel>() {
             @Override
             public void onResponse(Call<PostModel> call, Response<PostModel> response) {
-                System.out.println("Edit!");
+                List<PostModel> oldPostsList = posts.getValue();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    oldPostsList.removeIf(e -> e.getId() == postModel.getId());
+                    oldPostsList.add(0, postModel);
+                    posts.setValue(oldPostsList);
+                }
             }
 
             @Override
