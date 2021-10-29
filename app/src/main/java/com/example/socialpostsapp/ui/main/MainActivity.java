@@ -1,6 +1,7 @@
 package com.example.socialpostsapp.ui.main;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import com.example.socialpostsapp.ui.login.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.net.URI;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -53,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
                     findViewById(R.id.fab).setVisibility(View.GONE);
                 }
                 adapter.setList(postModels);
-
             }
         });
 
