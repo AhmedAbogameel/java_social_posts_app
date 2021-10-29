@@ -35,3 +35,57 @@ public class LoginViewModel extends ViewModel {
     }
 
 }
+
+/*
+
+     initOTP();
+    PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.getCredential(otp, "123456");
+    signInWithPhoneAuthCredential(phoneAuthCredential);
+
+
+    String otp;
+
+    public void initOTP(){
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                "+201553953843",
+                60,
+                TimeUnit.SECONDS,
+                this,
+                new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+
+                    @Override
+                    public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                        super.onCodeSent(s, forceResendingToken);
+                        otp = s;
+                    }
+
+                    @Override
+                    public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+                        signInWithPhoneAuthCredential(phoneAuthCredential);
+                    }
+
+                    @Override
+                    public void onVerificationFailed(@NonNull FirebaseException e) {
+                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }
+        );
+    }
+
+    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
+        FirebaseAuth.getInstance().signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            FirebaseUser user = task.getResult().getUser();
+                            System.out.println(user.getProviderId());
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Sign In Failed!", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+    }
+
+    - FirebaseStorage
+ */
