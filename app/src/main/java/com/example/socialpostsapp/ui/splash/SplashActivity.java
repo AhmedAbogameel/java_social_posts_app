@@ -6,6 +6,7 @@ import android.os.Bundle;
 import com.example.socialpostsapp.R;
 import com.example.socialpostsapp.ui.login.LoginActivity;
 import com.example.socialpostsapp.ui.main.MainActivity;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Timer;
@@ -17,6 +18,8 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+        FirebaseApp.initializeApp(this);
 
         new Timer().schedule(new TimerTask() {
             @Override

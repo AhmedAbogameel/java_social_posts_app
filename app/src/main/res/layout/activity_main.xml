@@ -41,6 +41,13 @@
             android:progress="@integer/material_motion_duration_medium_1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
+    <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/homeProfileImage"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="4dp" app:layout_constraintStart_toStartOf="@+id/include"
+            app:layout_constraintHorizontal_bias="0.709"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

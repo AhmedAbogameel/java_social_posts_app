@@ -1,15 +1,20 @@
 package com.example.socialpostsapp.ui.main;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
+import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.bumptech.glide.Glide;
 import com.example.socialpostsapp.R;
 import com.example.socialpostsapp.firebase.FirebaseMessagingHelper;
 import com.example.socialpostsapp.pojo.PostModel;
@@ -18,6 +23,7 @@ import com.example.socialpostsapp.ui.login.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 
@@ -32,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
+
+        getProfileImage();
 
         new SQLHelper(this);
         new FirebaseMessagingHelper(this);
@@ -68,6 +76,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void getProfileImage(){
+        ImageView imageView = findViewById(R.id.homeProfileImage);
+        String imageUrl = "https://firebasestorage.googleapis.com/v0/b/pongoo.appspot.com/o/" + FirebaseAuth.getInstance().getUid() + "?alt=media&token=abdd5c8e-29d8-4f66-b9ea-9910431a1c7b";
+        Glide.with(this).load(imageUrl).into(imageView);
     }
 
     public void onFABClicked(View view) {
@@ -125,4 +139,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    - FirebaseStorage
  */
