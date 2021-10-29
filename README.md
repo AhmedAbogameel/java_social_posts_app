@@ -6,7 +6,9 @@
 
 # FirebaseAuth Email & OTP.
 
-# GetImage from gallery then upload to FirebaseAccount
+# FirebaseStorage for storing profile images.
+
+# GetImage from gallery then upload to FirebaseStorage.
 
 # LocalNotification.
 
