@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.socialpostsapp.R;
+import com.example.socialpostsapp.firebase.FirebaseMessagingHelper;
 import com.example.socialpostsapp.pojo.PostModel;
 import com.example.socialpostsapp.sql.SQLHelper;
 
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         new SQLHelper(this);
+        new FirebaseMessagingHelper(this);
 
         postsViewModel = ViewModelProviders.of(this).get(PostsViewModel.class);
         postsViewModel.getPosts();
