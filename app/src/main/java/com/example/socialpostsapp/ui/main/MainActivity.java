@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 findViewById(R.id.progressBar).setVisibility(View.GONE);
                 if(postsViewModel.isOffline){
                     findViewById(R.id.fab).setVisibility(View.GONE);
+                    findViewById(R.id.chatFAB).setVisibility(View.GONE);
                 }
                 adapter.setList(postModels);
             }

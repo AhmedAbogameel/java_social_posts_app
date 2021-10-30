@@ -59,16 +59,19 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
         holder.saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if(SQLHelper.isFav(postModel.getId())){
                     SQLHelper.removeFav(postModel.getId());
                 }else{
                     SQLHelper.addFav(postModel);
                 }
+
                 if(postsViewModel.isOffline) {
                     notifyItemRemoved(position);
                 } else {
                     notifyItemChanged(position);
                 }
+
             }
         });
 
