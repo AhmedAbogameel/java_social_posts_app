@@ -11,6 +11,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.SocialPostsApp">
+        <activity android:name=".ui.supportChat.SupportChatActivity">
+        </activity>
         <activity android:name=".ui.signUp.SignUpActivity">
         </activity>
         <activity android:name=".ui.splash.SplashActivity">

@@ -46,6 +46,9 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:28.4.2')
     implementation 'com.google.firebase:firebase-messaging'
 
+    // FirebaseFirestore
+    implementation 'com.google.firebase:firebase-firestore'
+
     // FirebaseAuth
     implementation 'com.google.firebase:firebase-auth'
 

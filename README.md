@@ -4,6 +4,8 @@
 
 # FirebaseMessaging.
 
+# FirebaseFirestore for SupportChat.
+
 # FirebaseAuth Email & OTP.
 
 # FirebaseStorage for storing profile images.

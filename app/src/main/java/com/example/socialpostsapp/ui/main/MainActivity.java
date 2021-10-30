@@ -16,6 +16,7 @@ import com.example.socialpostsapp.firebase.FirebaseMessagingHelper;
 import com.example.socialpostsapp.pojo.PostModel;
 import com.example.socialpostsapp.sql.SQLHelper;
 import com.example.socialpostsapp.ui.login.LoginActivity;
+import com.example.socialpostsapp.ui.supportChat.SupportChatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import java.util.List;
 
@@ -82,5 +83,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void onFABClicked(View view) {
         AddPostDialog.showDialog(this, this.postsViewModel, null);
+    }
+
+    public void onChatFABClicked(View view) {
+        Intent intent = new Intent(this, SupportChatActivity.class);
+        startActivity(intent);
     }
 }
